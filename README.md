@@ -76,8 +76,8 @@
 ## 2 - Modelagem Conceitual
 <img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/Prova DB - Modelo Conceitual.jpeg"/>
 
-## 2 - Modelagem Lógico
-<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/Prova DB - Modelo Logico.jpeg"/>
+## 3 - Modelagem Lógico
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/Prova DB - Modelo Lógico.jpeg"/>
 
 
 :memo:Dos [diversos](https://pt.wikipedia.org/wiki/Lista_de_bancos_de_dados) banco de dados relacionais que existem.  
