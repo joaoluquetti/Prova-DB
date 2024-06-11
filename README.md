@@ -1,13 +1,12 @@
 # Avaliação Final -Modelagem de Banco de Dados Completa
 
 
-
 ## 1- Cenário
   Banco de dados em SQL para uma Unidade Básica de Saúde (UBS) ou posto de saúde.
 
   Entidades:
-  
-    - Pacientes
+   
+   	- Pacientes
     
     - Médicos
     
