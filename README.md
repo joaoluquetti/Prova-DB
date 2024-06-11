@@ -298,5 +298,136 @@
 	(21, 'Exame de Sangue', 'Normal', '2023-01-20');
 
 ## 6 - CRUD
+Criação de um Paciente:
+
+	INSERT INTO Telefone_Paciente (Telefone) VALUES ('21987654341');
+
+	INSERT INTO Paciente (Nome_Paciente, Data_Nasc, Genero, Telefone_ID, Rua, Numero, Cidade, CEP, UF, Hist_Medico)
+	VALUES ('Paulo Martins', '1984-11-22', 'M', 21, 'Rua U', 2100, 'Fortaleza', 22000000, 'CE', 'Hipertensão');
+
+	SELECT * FROM Telefone_Paciente;
+
+	SELECT * FROM Paciente;
+
+Visualização do cliente e telefone após inserção no banco de dados:
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 8.39.50 PM.jpeg"/>
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 8.40.46 PM.jpeg"/>
+
+Atualização do nome de um Paciente:
+
+	UPDATE Paciente
+	SET Nome_Paciente = 'Paulo Roberto Martins'
+	WHERE ID_Paciente = 21;
+
+ 	SELECT * FROM Paciente WHERE ID_Paciente = 21;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 8.41.37 PM.jpeg"/>
+
+Remoção do nome de um Paciente (devido chave estrangeira, necessário realizar a remoção nas outras tabelas antes de remover da tabela Paciente):
+
+	DELETE FROM Consulta
+	WHERE Paciente_ID = 21;
+
+	DELETE FROM Prontuario
+	WHERE Paciente_ID = 21;
+
+	DELETE FROM Exame
+	WHERE Paciente_ID = 21;
+
+	DELETE FROM Paciente
+	WHERE ID_Paciente = 21;
+
+	SELECT * FROM Paciente WHERE ID_Paciente = 21;
 
 
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 8.45.25 PM.jpeg"/>
+
+
+## 6 - Relatorios:
+
+- Nome do Paciente e Médico com data, horário, diagnostico e prescrição da consulta:
+  
+		SELECT Nome_Paciente, Nome_Medico, Data_Hora_Consulta, Diagnostico, Prescricao FROM Paciente
+		JOIN Consulta ON Consulta.Paciente_ID = Paciente.ID_Paciente
+		JOIN Medico ON Medico.ID_Medico = Consulta.Medico_ID
+		WHERE ID_Paciente = 20;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.00.10 PM.jpeg"/>
+
+- Todos os pacientes por ordem alfabética:
+
+		SELECT * FROM Paciente
+		ORDER BY Nome_Paciente;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.01.30 PM.jpeg"/>
+
+- Nome, telefone e endereço do Paciente
+
+		SELECT Nome_Paciente, Telefone, Rua, Numero, Cidade, CEP, UF FROM Paciente
+		JOIN Telefone_Paciente ON Paciente.Telefone_ID = Telefone_Paciente.ID_Telefone
+		WHERE ID_Paciente=5;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.26.56 PM.jpeg"/>
+
+- Nome, Histórico de Consulta e Exames de um Paciente:
+  
+		SELECT Nome_Paciente, Hist_Consulta, Hist_Exames FROM Paciente
+		JOIN Prontuario ON Paciente.ID_Paciente = Prontuario.Paciente_ID
+		WHERE ID_Paciente = 15;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.15.21 PM.jpeg"/>
+
+- Nome, data de nascimento, telefone, exame, resultado e data de coleta do exame feito por um paciente:
+
+		SELECT Nome_Paciente, Data_Nasc, Telefone, Nome_Exame, Resultado, Data_Exame FROM Paciente p
+		JOIN Exame e ON p.ID_Paciente = e.Paciente_ID
+		JOIN Telefone_Paciente t ON p.Telefone_ID = t.ID_Telefone
+		WHERE ID_Paciente = 12;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.13.23 PM.jpeg"/>
+
+- Nome, telefone, dia e hora da consulta, prescrição e diagnostico feito pelo médico:
+  
+		SELECT Nome_Medico, Telefone, Data_Hora_Consulta, Prescricao, Diagnostico FROM Medico m
+		JOIN Telefone_Medico t ON t.ID_Telefone = m.Telefone_ID
+		JOIN Consulta c ON c.Medico_ID = m.ID_Medico
+		WHERE ID_Medico = 3;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.18.05 PM.jpeg"/>
+
+- Nome de todos os médicos por ordem alfabética:
+  
+		SELECT * FROM Medico
+		ORDER BY Nome_Medico;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.19.01 PM.jpeg"/>
+
+- Nome, telefone e endereço de diversos pacientes:
+  
+		SELECT Nome_Paciente, Telefone, Rua, Numero, Cidade, CEP, UF FROM Paciente
+		JOIN Telefone_Paciente ON Paciente.Telefone_ID = Telefone_Paciente.ID_Telefone
+		WHERE ID_Paciente = 5 OR ID_Paciente = 10 OR ID_Paciente = 15
+		ORDER BY Nome_Paciente;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.26.56 PM.jpeg"/>
+
+- Nome do paciente, telefone do paciente, nome do médico, telefone do médico e dia e hora da consulta:
+  
+		SELECT Nome_Paciente, Telefone_Paciente.Telefone, Nome_Medico, Telefone_Medico.Telefone, Data_Hora_Consulta FROM Paciente p
+		JOIN Consulta c ON c.Paciente_ID = p.ID_Paciente
+		JOIN Medico m ON m.ID_Medico = c.Medico_ID
+		JOIN Telefone_Medico ON Telefone_Medico.ID_Telefone = m.Telefone_ID
+		JOIN Telefone_Paciente ON Telefone_Paciente.ID_Telefone = p.Telefone_ID
+		WHERE ID_Paciente = 8;
+
+<img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.42.41 PM.jpeg"/>
+
+- Nome e especialidade do médico e nome, dosagem e instrução do medicamento de um médico e medicamento específico:
+  
+		SELECT Nome_Medico, Especialidade, Nome_Medicamento, Dosagem, Instrucao FROM Medico m
+		JOIN Consulta c ON c.Medico_ID = m.ID_Medico
+		JOIN Medicamento md ON md.ID_Medicamento = c.Medicamento_ID
+		WHERE ID_Medico = 7 OR ID_Medicamento = 10;
+
+  <img src="https://raw.githubusercontent.com/joaoluquetti/Prova-DB/main/imagens/WhatsApp Image 2024-06-10 at 9.50.39 PM.jpeg"/>
