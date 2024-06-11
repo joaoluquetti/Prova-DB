@@ -1,4 +1,4 @@
-# Avaliação Final -Modelagem de Banco de Dados Completa
+# Avaliação Final - Modelagem de Banco de Dados Completa
 
 
 ## 1- Cenário
